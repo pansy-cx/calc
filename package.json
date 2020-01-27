@@ -1,0 +1,21 @@
+{
+  "name": "calc",
+  "version": "0.0.1",
+  "description": "c++ simple calc",
+  "main": "map.cpp",
+  "dependencies": {},
+  "devDependencies": {
+    "git-cz": "^4.2.0",
+    "husky": "^4.2.1"
+  },
+  "scripts": {
+    "commit": "npx git-cz"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": ""
+    }
+  },
+  "author": "",
+  "license": "ISC"
+}
