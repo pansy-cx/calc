@@ -2,7 +2,7 @@
   "name": "calc",
   "version": "0.0.1",
   "description": "c++ simple calc",
-  "main": "map.cpp",
+  "main": "src/map.cpp",
   "dependencies": {},
   "devDependencies": {
     "git-cz": "^4.2.0",
@@ -10,9 +10,9 @@
   },
   "scripts": {
     "commit": "npx git-cz",
-    "build": "g++ main.cpp",
-    "run": "./a.out",
-    "start": "g++ main.cpp && ./a.out"
+    "build": "g++ src/main.cpp -std=c++11 -o build/calc.out",
+    "run": "./build/calc.out",
+    "start": "npm run build && npm run run"
   },
   "husky": {
     "hooks": {
