@@ -6,7 +6,6 @@
 ### 使用
 
 ```
-npm run build   编译
-npm run run     运行
-npm run start   编译+运行
+cmake .
+make
 ```
