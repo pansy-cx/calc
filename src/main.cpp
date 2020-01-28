@@ -1,4 +1,5 @@
 #include <iostream>
+#include "utils/hash.h"
 
 using namespace std;
 
@@ -12,16 +13,25 @@ int main()
   cin >> sign;
   cout << "Input Second Number" << endl;
   cin >> num2;
-  if (strcmp(sign, "+") == 0) {
+  switch (hash_(sign))
+  {
+  case "+"_hash:
     result = num1 + num2;
-  } else if (strcmp(sign, "-") == 0) {
+    break;
+  case "-"_hash:
     result = num1 - num2;
-  } else if (strcmp(sign, "*") == 0) {
+    break;
+  case "*"_hash:
     result = num1 * num2;
-  } else if (strcmp(sign, "/") == 0) {
+    break;
+  case "/"_hash:
     result = num1 / num2;
-  } else if (strcmp(sign, "%") == 0) {
+    break;
+  case "%"_hash:
     result = int(num1) % int(num2);
+    break;
+  default:
+    break;
   }
   cout << "result is: " << result << endl;
 }
