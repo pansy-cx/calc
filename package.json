@@ -9,7 +9,10 @@
     "husky": "^4.2.1"
   },
   "scripts": {
-    "commit": "npx git-cz"
+    "commit": "npx git-cz",
+    "build": "g++ main.cpp",
+    "run": "./a.out",
+    "start": "g++ main.cpp && ./a.out"
   },
   "husky": {
     "hooks": {
