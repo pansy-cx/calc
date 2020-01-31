@@ -1,39 +1,19 @@
 #include <iostream>
-#include <boost/algorithm/string/replace.hpp>
 #include <string>
-#include "utils/hash.h"
+#include <sstream>
+#include "utils/maths.h"
 
 using namespace std;
-using namespace boost::algorithm;
 
-int main()
-{
-  int result = 0;
+int main() {
   string expr = "";
-  cout << "Input Calc Function" << endl;
-  cin >> expr;
-  replace_all(expr, " ", "");
-  cout << "expr: " << expr << endl;
-
-  // switch (hash_(sign))
-  // {
-  // case "+"_hash:
-  //   result = num1 + num2;
-  //   break;
-  // case "-"_hash:
-  //   result = num1 - num2;
-  //   break;
-  // case "*"_hash:
-  //   result = num1 * num2;
-  //   break;
-  // case "/"_hash:
-  //   result = num1 / num2;
-  //   break;
-  // case "%"_hash:
-  //   result = int(num1) % int(num2);
-  //   break;
-  // default:
-  //   break;
-  // }
-  cout << "result is: " << result << endl;
+  cout << "请输入算术表达式" << endl;
+  while (true) {
+    getline(cin, expr);
+    if (expr == "Q" || expr == "q") return 0;
+    auto postExpr = mid2post(expr);
+    double result = calcPost(postExpr);
+    cout << "= " << result << endl;
+  }
+  return 0;
 }

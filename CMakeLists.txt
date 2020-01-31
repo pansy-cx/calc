@@ -10,9 +10,9 @@ project(${PROJECT_NAME})
 # 指定生成目标
 add_executable(${PROJECT_NAME} src/main.cpp)
 # 三方库
-find_package(Boost REQUIRED COMPONENTS system thread)
-include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+# find_package(Boost REQUIRED COMPONENTS system thread)
+# include_directories(${Boost_INCLUDE_DIRS})
+# target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 
 # 指定编译 C++ 11 版本
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_range_for)
