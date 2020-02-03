@@ -22,20 +22,20 @@ static bool cmpPriority(char top, char cur) {
 }
 
 // 中缀表达式 -> 后缀表达式
-static vector<string> mid2post(string &str) {
+static vector<string> mid2post(const string &str) {
   vector<string>vStr;
   stack<char> signStack;
-  str = removeSpace(str);
-  int strLength = str.size();
+  string _str = removeSpace(str);
+  int strLength = _str.size();
   for (int i = 0; i < strLength; i++) {
-    char ch = str[i];
+    char ch = _str[i];
     if (ch == ' ' || ch == '\t') continue;
 
     if (isdigit(ch)) {
       string tmp = "";
       tmp += ch;
-      while (i + 1 < strLength && (isdigit(str[i+1]) || str[i+1] == '.')) {
-        tmp += str[i+1];
+      while (i + 1 < strLength && (isdigit(_str[i+1]) || _str[i+1] == '.')) {
+        tmp += _str[i+1];
         i++;
       }
       vStr.push_back(tmp);

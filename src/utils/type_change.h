@@ -12,10 +12,10 @@ static int charToInt(char ch) {
   // ch - '0' -> ch - 48 -> string -> int
   return ch - '0';
 }
-static bool isDigit(string &str) {
+static bool isDigit(const string &str) {
   return regex_match(str, regex("^\\d+(\\.\\d+)?$"));
 }
-static double stringToDouble(string &str) {
+static double stringToDouble(const string &str) {
   if (!isDigit(str)) return NAN;
   int integer = 0;
   double decimal = 0.0;

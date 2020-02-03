@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-static string removeSpace(string str) {
+static string removeSpace(const string &str) {
   string s = "";
   for (int i = 0; i < str.size(); i++) {
     char tmp = str[i];
