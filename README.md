@@ -1,13 +1,14 @@
 ### 计算器
 
+本来想用 QT 写 GUI 的，想想也是在 Mac 系统里玩，所以改用 SwiftUI。
+
+UI 部分用 Swift，逻辑部分用 C++，中间通过 Objective-C 连接。
+
 - [v0.1](https://github.com/pansy-cx/Calc/tree/58e76feaeff80e5c0923a0c8273268e1def05906): 用输入输出语句完成基本计算。
 - [v0.2](https://github.com/pansy-cx/Calc/tree/9aa3e69c36c41aee20bccc222e10296b5446eaab): 使用 switch 代替 if else。
 - [v0.3](https://github.com/pansy-cx/Calc/tree/13f2f2853bc69e6b138717bbdeffaf6ba11f792f): 添加词法分析。
+- [v0.4](https://github.com/pansy-cx/Calc/tree/db09a8cb5d54945948ddc925aa80c778a3fe632f) 添加 Swift UI 做 GUI 库。
 
 ### 使用
 
-```
-cmake .
-make
-./build/Calc
-```
+XCode 打开 `./Calculator.xcodeproj`
