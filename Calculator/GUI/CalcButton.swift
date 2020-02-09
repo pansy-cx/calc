@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BlueButtonStyle: ButtonStyle {
+struct btnStyle: ButtonStyle {
     let color: Color
     let pressColor: Color
     let borderColor: Color
@@ -38,7 +38,7 @@ struct CalcButton: View {
                 .font(.system(size: 20))
         }
         .buttonStyle(
-            BlueButtonStyle(
+            btnStyle(
                 color: color,
                 pressColor: pressColor,
                 borderColor: borderColor,

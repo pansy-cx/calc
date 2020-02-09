@@ -12,8 +12,8 @@
 using namespace std;
 
 @implementation Calculation
-- (void) print {
-    auto calc = Calculation_cpp();
-    calc.print();
+- (void)getInput:(NSString *)str {
+    auto calc = Calculation_cpp::getInstance();
+    calc->get_input([str UTF8String]);
 }
 @end

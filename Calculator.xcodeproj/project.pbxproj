@@ -21,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D829C0F223EEDA850053F2C9 /* hash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
+		D829C0F823EF92DE0053F2C9 /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
 		D880836D23ED7F70001580ED /* Calculator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calculator-Bridging-Header.h"; sourceTree = "<group>"; };
 		D880837A23ED8E27001580ED /* Calculation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calculation.h; sourceTree = "<group>"; };
 		D880837B23ED8E27001580ED /* Calculation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Calculation.mm; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D829C0F023EEDA750053F2C9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D829C0F223EEDA850053F2C9 /* hash.hpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D8A1893C23ED64A30019502E /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 				D880837A23ED8E27001580ED /* Calculation.h */,
 				D880837B23ED8E27001580ED /* Calculation.mm */,
 				D880837E23ED923F001580ED /* Calculation.hpp */,
+				D829C0F823EF92DE0053F2C9 /* Field.hpp */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -81,6 +92,7 @@
 		D8FD93A423EADEE5004FF70D /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				D829C0F023EEDA750053F2C9 /* Utils */,
 				D8A1893C23ED64A30019502E /* Services */,
 				D8FD93BD23EBB21D004FF70D /* Extension */,
 				D8FD93B823EAE2A0004FF70D /* GUI */,
