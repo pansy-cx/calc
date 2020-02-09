@@ -12,8 +12,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Field.hpp"
+#include "../Struct/Field.hpp"
 #include "../Utils/hash.hpp"
+#include "../Utils/math.hpp"
 
 using namespace std;
 
@@ -56,23 +57,14 @@ void Calculation_cpp::get_input(const string &str) {
             last_type = SIGN;
             break;
         case "AC"_hash: case "C"_hash:
-            cout << "acc: " << str << endl;
+            if (str == "AC") vector<Field>().swap(vexpr);
+            // TODO C
             break;
         case "="_hash: {
-            vector<Field>::iterator it = vexpr.end();
-            while(it != vexpr.begin()) {
-                cout << (*(--it)).value << endl;
-            }
-//            Field f = vexpr.back();
-//            vexpr.pop_back();
-//            string second = f.value;
-//            f = vexpr.back();
-//            vexpr.pop_back();
-//            string sign = f.value;
-//            f = vexpr.back();
-//            vexpr.pop_back();
-//            string first = f.value;
-//            cout << first << " " << sign << " " << second << endl;
+            auto post = mid_2_post(vexpr);
+            double ret = calc_post(post);
+            cout << ret << endl;
+            vector<Field>().swap(vexpr);
             break;
         }
         default:
