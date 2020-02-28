@@ -12,8 +12,13 @@
 using namespace std;
 
 @implementation Calculation
-- (void)getInput:(NSString *)str {
+- (void)onInput:(NSString *)str {
     auto calc = Calculation_cpp::getInstance();
-    calc->get_input([str UTF8String]);
+    calc->on_input([str UTF8String]);
+}
+- (NSString *)getScreenResult {
+    auto calc = Calculation_cpp::getInstance();
+    return [NSString stringWithCString:calc->get_screen_result().c_str()
+                              encoding:[NSString defaultCStringEncoding]];
 }
 @end

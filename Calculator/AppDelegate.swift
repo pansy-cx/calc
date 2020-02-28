@@ -17,7 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        // 设置全局变量
+        let calcData = CalculatorData()
+        let contentView = ContentView().environmentObject(calcData)
         
         // Create the window and set the content view. 
         window = NSWindow(

@@ -40,9 +40,10 @@ let btnArray: [IBtnType] = [
 let calc = Calculation()
 
 struct _CalcButton: View {
+    @EnvironmentObject var calcData: CalculatorData
     var btnType: IBtnType?
     @State private var btnText = "";
-    init(btnType: IBtnType?) {
+    init(btnType: IBtnType?, calcData: CalculatorData) {
         self.btnType = btnType
         _btnText = State(initialValue: btnType?.value ?? "")
     }
@@ -55,7 +56,8 @@ struct _CalcButton: View {
                 pressColor: Color.init(hex: _btnType.pressColor),
                 borderColor: Color.init(hex: "605755"),
                 action: {() -> Void in
-                    calc.getInput(self.btnText)
+                    calc.onInput(self.btnText)
+                    self.calcData.setScreenResult(val: calc.getScreenResult())
                     // TODO
                     if _btnType.changeValue != nil {
                         let changeValue = _btnType.changeValue!
@@ -70,13 +72,14 @@ struct _CalcButton: View {
 }
 
 struct GridButton: View {
+    @EnvironmentObject var calcData: CalculatorData
     var body: some View {
         VStack() {
             ForEach(0..<5) { row in
                 HStack(spacing: 0.0) {
                     ForEach(0..<4) { column -> _CalcButton in
                         let i = row * 4 + column
-                        return _CalcButton(btnType: btnArray[safe: i])
+                        return _CalcButton(btnType: btnArray[safe: i], calcData: self.calcData)
                     }
                 }
             }

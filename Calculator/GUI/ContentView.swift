@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var calcData: CalculatorData
     var body: some View {
         VStack() {
-            ResultView(result: "0")
+            ResultView(result: calcData.screenResult)
             GridButton()
         }
         .frame(width: 232, height: 300)

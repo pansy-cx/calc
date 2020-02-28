@@ -20,7 +20,7 @@ using namespace std;
 
 class Calculation_cpp {
 private:
-    char screen_result;    // 当前屏幕显示的结果
+    string screen_result;    // 当前屏幕显示的结果
     CALC_TYPE last_type;     // 上次输入的状态
     vector<Field> vexpr;    // 表达式堆栈
 private:
@@ -31,7 +31,8 @@ private:
     Calculation_cpp operator=(const Calculation_cpp&);
 public:
     static Calculation_cpp* getInstance();
-    void get_input(const string &str);
+    void on_input(const string &str);
+    string get_screen_result();
 };
 // private
 Calculation_cpp* Calculation_cpp::pSingle = new (std::nothrow)Calculation_cpp;
@@ -43,7 +44,7 @@ Calculation_cpp::~Calculation_cpp() {
 Calculation_cpp* Calculation_cpp::getInstance() {
     return pSingle;
 }
-void Calculation_cpp::get_input(const string &str) {
+void Calculation_cpp::on_input(const string &str) {
     if (vexpr.size() == 0) {
         Field f(DIGITAL, "0");
         vexpr.push_back(f);
@@ -63,7 +64,7 @@ void Calculation_cpp::get_input(const string &str) {
         case "="_hash: {
             auto post = mid_2_post(vexpr);
             double ret = calc_post(post);
-            cout << ret << endl;
+            screen_result = double_to_string(ret);
             vector<Field>().swap(vexpr);
             break;
         }
@@ -74,15 +75,20 @@ void Calculation_cpp::get_input(const string &str) {
                 Field *f = &vexpr.back();
                 string value = f->value;
                 f->value = value == "0" ? _str : value + _str;
+                screen_result = f->value;
                 f = NULL;
                 delete f;
             } else {
                 Field f(DIGITAL, _str == "." ? "0." : _str);
+                screen_result = f.value;
                 vexpr.push_back(f);
             }
             last_type  = DIGITAL;
             break;
     }
+}
+string Calculation_cpp::get_screen_result() {
+    return screen_result;
 }
 
 #endif /* Calculation_hpp */

@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Calculation : NSObject
-- (void)getInput:(NSString *)str;
+- (void)onInput:(NSString *)str;
+- (NSString *)getScreenResult;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -42,5 +42,13 @@ static double string_to_double(const string &str) {
   }
   return integer + decimal;
 }
+static string double_to_string(double num) {
+    string str = std::to_string (num);
+    str.erase(str.find_last_not_of('0') + 1, string::npos);
+    if (str[str.size() - 1] == '.') {
+        str.erase(str.end() - 1);
+    }
+    return str;
+}
 
 #endif /* type_change_hpp */

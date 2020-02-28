@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C754FF7C2408EFC100C9B140 /* CalculatorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C754FF7B2408EFC100C9B140 /* CalculatorData.swift */; };
 		D880837C23ED8E27001580ED /* Calculation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D880837B23ED8E27001580ED /* Calculation.mm */; };
 		D8A1893723EC39A80019502E /* GridButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1893623EC39A80019502E /* GridButton.swift */; };
 		D8A1893923EC443C0019502E /* ExArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1893823EC443C0019502E /* ExArray.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C754FF7B2408EFC100C9B140 /* CalculatorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorData.swift; sourceTree = "<group>"; };
 		D829C0F223EEDA850053F2C9 /* hash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
 		D829C0F823EF92DE0053F2C9 /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
 		D829C0FB23EFA5ED0053F2C9 /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = math.hpp; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C754FF7A2408EF9D00C9B140 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C754FF7B2408EFC100C9B140 /* CalculatorData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		D829C0F023EEDA750053F2C9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		D8FD93A423EADEE5004FF70D /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C754FF7A2408EF9D00C9B140 /* Data */,
 				D829C10023EFA7510053F2C9 /* Struct */,
 				D829C0F023EEDA750053F2C9 /* Utils */,
 				D8A1893C23ED64A30019502E /* Services */,
@@ -225,6 +236,7 @@
 				D8A1893723EC39A80019502E /* GridButton.swift in Sources */,
 				D8FD93BF23EBB23B004FF70D /* ExColor.swift in Sources */,
 				D8FD93BA23EAE36D004FF70D /* ResultView.swift in Sources */,
+				C754FF7C2408EFC100C9B140 /* CalculatorData.swift in Sources */,
 				D880837C23ED8E27001580ED /* Calculation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +400,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.virgil.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Calculator/Services/Calculator-Bridging-Header.h";
@@ -418,6 +431,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.virgil.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Calculator/Services/Calculator-Bridging-Header.h";
