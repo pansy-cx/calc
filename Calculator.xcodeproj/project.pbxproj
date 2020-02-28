@@ -23,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		C754FF7B2408EFC100C9B140 /* CalculatorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorData.swift; sourceTree = "<group>"; };
+		C758155D240926B400C343FC /* type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = type.h; sourceTree = "<group>"; };
 		D829C0F223EEDA850053F2C9 /* hash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
 		D829C0F823EF92DE0053F2C9 /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
 		D829C0FB23EFA5ED0053F2C9 /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = math.hpp; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				D829C0F823EF92DE0053F2C9 /* Field.hpp */,
+				C758155D240926B400C343FC /* type.h */,
 			);
 			path = Struct;
 			sourceTree = "<group>";

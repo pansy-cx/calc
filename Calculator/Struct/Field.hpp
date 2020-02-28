@@ -11,8 +11,7 @@
 
 #include <stdio.h>
 #include <string>
-
-enum CALC_TYPE { DIGITAL, SIGN };
+#include "type.h"
 
 using namespace std;
 

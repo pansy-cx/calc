@@ -9,14 +9,13 @@
 import SwiftUI
 struct IBtnType {
     let value: String
-    var changeValue: String? = nil
     let color: String
     let pressColor: String
     var width = 58
     var height = 48
 }
 let btnArray: [IBtnType] = [
-    IBtnType(value: "AC", changeValue: "C", color: "656567", pressColor: "656567aa"),
+    IBtnType(value: "AC", color: "656567", pressColor: "656567aa"),
     IBtnType(value: "±", color: "656567", pressColor: "656567aa"),
     IBtnType(value: "%", color: "656567", pressColor: "656567aa"),
     IBtnType(value: "÷", color: "f99c2a", pressColor: "f99c2aaa"),
@@ -59,9 +58,11 @@ struct _CalcButton: View {
                     calc.onInput(self.btnText)
                     self.calcData.setScreenResult(val: calc.getScreenResult())
                     // TODO
-                    if _btnType.changeValue != nil {
-                        let changeValue = _btnType.changeValue!
-                        self.btnText = self.btnText == _btnType.value ? changeValue : _btnType.value
+                    var type = "AC"
+                    if (calc.getCurrentStatus() == DIGITAL) {
+                        type = "C";
+                    } else {
+                        type = "AC";
                     }
                 },
                 width: _btnType.width,
