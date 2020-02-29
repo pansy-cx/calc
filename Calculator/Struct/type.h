@@ -10,6 +10,6 @@
 #define type_h
 
 #include <stdio.h>
-enum CALC_TYPE { DIGITAL, SIGN };
+enum CALC_TYPE { INIT, DIGITAL, SIGN };
 
 #endif /* type_h */

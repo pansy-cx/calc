@@ -39,31 +39,22 @@ let btnArray: [IBtnType] = [
 let calc = Calculation()
 
 struct _CalcButton: View {
-    @EnvironmentObject var calcData: CalculatorData
     var btnType: IBtnType?
-    @State private var btnText = "";
+    @EnvironmentObject var calcData: CalculatorData
     init(btnType: IBtnType?, calcData: CalculatorData) {
         self.btnType = btnType
-        _btnText = State(initialValue: btnType?.value ?? "")
     }
     var body: some View {
         if (btnType != nil) {
             let _btnType = btnType!
             return AnyView(CalcButton(
-                btnText: self.btnText,
+                btnText: _btnType.value,
                 color: Color.init(hex: _btnType.color),
                 pressColor: Color.init(hex: _btnType.pressColor),
                 borderColor: Color.init(hex: "605755"),
                 action: {() -> Void in
-                    calc.onInput(self.btnText)
+                    calc.onInput(_btnType.value)
                     self.calcData.setScreenResult(val: calc.getScreenResult())
-                    // TODO
-                    var type = "AC"
-                    if (calc.getCurrentStatus() == DIGITAL) {
-                        type = "C";
-                    } else {
-                        type = "AC";
-                    }
                 },
                 width: _btnType.width,
                 height: _btnType.height

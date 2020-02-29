@@ -21,8 +21,4 @@ using namespace std;
     return [NSString stringWithCString:calc->get_screen_result().c_str()
                               encoding:[NSString defaultCStringEncoding]];
 }
-- (enum CALC_TYPE)getCurrentStatus {
-    auto calc = Calculation_cpp::getInstance();
-    return calc->current_status();
-}
 @end

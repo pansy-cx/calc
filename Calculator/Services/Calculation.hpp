@@ -31,7 +31,6 @@ public:
     static Calculation_cpp* getInstance();
     void on_input(const string &str);
     string get_screen_result();
-    CALC_TYPE current_status();
 };
 // private
 Calculation_cpp* Calculation_cpp::pSingle = new (std::nothrow)Calculation_cpp;
@@ -122,10 +121,6 @@ string Calculation_cpp::get_screen_result() {
         }
     }
     return "0";
-}
-CALC_TYPE Calculation_cpp::current_status() {
-    Field f = vexpr.back();
-    return f.type;
 }
 
 #endif /* Calculation_hpp */
