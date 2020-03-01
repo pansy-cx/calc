@@ -63,6 +63,7 @@ struct GridButton: View {
                                     }
                                 } else {
                                     calc.clearStack()
+                                    self.calcData.setScreenResult(val: calc.getScreenResult())
                                 }
                             },
                             width: _btnType.width,
