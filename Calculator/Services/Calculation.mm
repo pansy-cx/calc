@@ -25,12 +25,12 @@ using namespace std;
     auto calc = Calculation_cpp::getInstance();
     return calc->get_curr_type();
 }
-- (void)clearCurrStack {
-    auto calc = Calculation_cpp::getInstance();
-    calc->clear_curr_stack();
-}
 - (void)clearStack {
     auto calc = Calculation_cpp::getInstance();
     calc->clear_stack();
+}
+- (bool)getCurrClear {
+    auto calc = Calculation_cpp::getInstance();
+    return calc->get_curr_clear();
 }
 @end

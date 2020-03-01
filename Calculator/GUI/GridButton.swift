@@ -40,7 +40,6 @@ let calc = Calculation()
 
 struct GridButton: View {
     @EnvironmentObject var calcData: CalculatorData
-    @State private var isClearCurrent: Bool = false;   // 是否仅清除当前输入
     var body: some View {
         VStack() { ForEach(0..<5) { row in
             HStack(spacing: 0.0) { ForEach(0..<4) { column -> AnyView in
@@ -48,36 +47,19 @@ struct GridButton: View {
                 let btnType = btnArray[safe: i]
                 if (btnType != nil) {
                     let _btnType = btnType!
-                    if (_btnType.value == "AC") {
-                        return AnyView(CalcButton(
-                            btnText: self.isClearCurrent ? "C" : "AC",
-                            color: Color.init(hex: _btnType.color),
-                            pressColor: Color.init(hex: _btnType.pressColor),
-                            borderColor: Color.init(hex: "605755"),
-                            action: {() -> Void in
-                                if (self.isClearCurrent) {
-                                    calc.clearCurrStack()
-                                    self.isClearCurrent = false;
-                                    if calc.getCurrType() != DIGITAL {
-                                        self.calcData.setScreenResult(val: "0")
-                                    }
-                                } else {
-                                    calc.clearStack()
-                                    self.calcData.setScreenResult(val: calc.getScreenResult())
-                                }
-                            },
-                            width: _btnType.width,
-                            height: _btnType.height
-                        ))
-                    }
+                    let text = _btnType.value == "AC" ?
+                        calc.getCurrClear() ? "C" : "AC" : _btnType.value
                     return AnyView(CalcButton(
-                        btnText: _btnType.value,
+                        btnText: text,
                         color: Color.init(hex: _btnType.color),
                         pressColor: Color.init(hex: _btnType.pressColor),
                         borderColor: Color.init(hex: "605755"),
                         action: {() -> Void in
-                            calc.onInput(_btnType.value)
-                            self.isClearCurrent = true;
+                            if _btnType.value == "AC" {
+                                calc.clearStack()
+                            } else {
+                                calc.onInput(_btnType.value)
+                            }
                             self.calcData.setScreenResult(val: calc.getScreenResult())
                         },
                         width: _btnType.width,

@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onInput:(NSString *)str;
 - (NSString *)getScreenResult;
 - (enum CALC_TYPE)getCurrType;
-- (void)clearCurrStack;
 - (void)clearStack;
+- (bool)getCurrClear;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -21,6 +21,7 @@ using namespace std;
 
 class Calculation_cpp {
 private:
+    bool is_curr_clear;     // 清除状态，是清除当前栈或清除所有
     vector<Field> vexpr;    // 表达式堆栈
 private:
     static Calculation_cpp *pSingle;
@@ -35,6 +36,7 @@ public:
     CALC_TYPE get_curr_type();
     void clear_curr_stack();
     void clear_stack();
+    bool get_curr_clear();
 };
 // private
 Calculation_cpp* Calculation_cpp::pSingle = new (std::nothrow)Calculation_cpp;
@@ -51,8 +53,12 @@ void Calculation_cpp::on_input(const string &str) {
         Field f(DIGITAL, "0");
         vexpr.push_back(f);
     }
+    is_curr_clear = true;
     switch (hash_(str.c_str())) {
-        case "+"_hash: case "-"_hash: case "×"_hash: case "÷"_hash: {
+        case "+"_hash:
+        case "-"_hash:
+        case "×"_hash: case "*"_hash:
+        case "÷"_hash: case "/"_hash: {
             Field *f = &vexpr.back();
             if (f->type == DIGITAL) {
                 Field f(SIGN, str);
@@ -75,17 +81,18 @@ void Calculation_cpp::on_input(const string &str) {
             break;
         }
         case "±"_hash: {
-            Field *f = &vexpr.back();
-            string value = f->value;
-            double res = string_to_double(value) * (-1);
-            value = double_to_string(res);
-            f->value = value;
-            f = NULL;
-            delete f;
-            break;
+            vector<Field>::iterator iter = vexpr.end();
+            while(iter-- != vexpr.begin()) {
+                if (iter->type == DIGITAL && iter->value != "0") {
+                    double res = string_to_double(iter->value) * (-1);
+                    iter->value = double_to_string(res);
+                    break;
+                }
+            }
             break;
         }
         case "="_hash: {
+            is_curr_clear = false;
             auto post = mid_2_post(vexpr);
             double ret = calc_post(post);
             vector<Field>().swap(vexpr);
@@ -129,6 +136,9 @@ string Calculation_cpp::get_screen_result() {
         auto it = *(--iter);
         if (it.type == DIGITAL) {
             return it.value;
+        } else {
+            // 如果删除当前输入的数字，显示0，而不是显示上一个堆栈的数字
+            if (!is_curr_clear) return "0";
         }
     }
     return "0";
@@ -141,13 +151,18 @@ CALC_TYPE Calculation_cpp::get_curr_type() {
         return INIT;
     }
 }
-void Calculation_cpp::clear_curr_stack() {
-    if (!vexpr.empty()) {
-        vexpr.pop_back();
+void Calculation_cpp::clear_stack() {
+    if (is_curr_clear) {
+        if (!vexpr.empty()) {
+            vexpr.pop_back();
+        }
+        is_curr_clear = false;
+    } else {
+        vector<Field>().swap(vexpr);
     }
 }
-void Calculation_cpp::clear_stack() {
-    vector<Field>().swap(vexpr);
+bool Calculation_cpp::get_curr_clear() {
+    return is_curr_clear;
 }
 
 #endif /* Calculation_hpp */
