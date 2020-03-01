@@ -15,6 +15,7 @@
 #include "../Struct/Field.hpp"
 #include "../Utils/hash.hpp"
 #include "../Utils/math.hpp"
+#include "../Utils/type_change.hpp"
 
 using namespace std;
 
@@ -31,6 +32,9 @@ public:
     static Calculation_cpp* getInstance();
     void on_input(const string &str);
     string get_screen_result();
+    CALC_TYPE get_curr_type();
+    void clear_curr_stack();
+    void clear_stack();
 };
 // private
 Calculation_cpp* Calculation_cpp::pSingle = new (std::nothrow)Calculation_cpp;
@@ -81,17 +85,24 @@ void Calculation_cpp::on_input(const string &str) {
             break;
             break;
         }
-        case "AC"_hash: case "C"_hash: {
-            if (str == "AC") vector<Field>().swap(vexpr);
-            // TODO C
-            break;
-        }
         case "="_hash: {
             auto post = mid_2_post(vexpr);
             double ret = calc_post(post);
             vector<Field>().swap(vexpr);
             Field f(DIGITAL, double_to_string(ret));
             vexpr.push_back(f);
+            break;
+        }
+        case "."_hash: {
+            if (vexpr.empty() || vexpr.back().type == SIGN) {
+                Field new_field(DIGITAL, "0.");
+                vexpr.push_back(new_field);
+            } else {
+                Field *f = &vexpr.back();
+                if (f->type == DIGITAL && is_int(f->value)) f->value += ".";
+                f = NULL;
+                delete f;
+            }
             break;
         }
         default:
@@ -104,7 +115,7 @@ void Calculation_cpp::on_input(const string &str) {
                 f = NULL;
                 delete f;
             } else {
-                Field new_field(DIGITAL, _str == "." ? "0." : _str);
+                Field new_field(DIGITAL, _str);
                 vexpr.push_back(new_field);
             }
             f = NULL;
@@ -121,6 +132,22 @@ string Calculation_cpp::get_screen_result() {
         }
     }
     return "0";
+}
+CALC_TYPE Calculation_cpp::get_curr_type() {
+    if (!vexpr.empty()) {
+        Field f = vexpr.back();
+        return f.type;
+    } else {
+        return INIT;
+    }
+}
+void Calculation_cpp::clear_curr_stack() {
+    if (!vexpr.empty()) {
+        vexpr.pop_back();
+    }
+}
+void Calculation_cpp::clear_stack() {
+    vector<Field>().swap(vexpr);
 }
 
 #endif /* Calculation_hpp */

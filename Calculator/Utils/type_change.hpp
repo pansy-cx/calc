@@ -22,6 +22,9 @@ static int char_to_int(char ch) {
 static bool is_digit(const string &str) {
     return regex_match(str, regex("^-?\\d+(\\.\\d+)?$"));
 }
+static bool is_int(const string &str) {
+    return regex_match(str, regex("^\\d+$"));
+}
 static double string_to_double(const string &str) {
     if (!is_digit(str)) return NAN;
     int sign = 1;

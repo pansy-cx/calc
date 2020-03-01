@@ -21,4 +21,16 @@ using namespace std;
     return [NSString stringWithCString:calc->get_screen_result().c_str()
                               encoding:[NSString defaultCStringEncoding]];
 }
+- (enum CALC_TYPE)getCurrType {
+    auto calc = Calculation_cpp::getInstance();
+    return calc->get_curr_type();
+}
+- (void)clearCurrStack {
+    auto calc = Calculation_cpp::getInstance();
+    calc->clear_curr_stack();
+}
+- (void)clearStack {
+    auto calc = Calculation_cpp::getInstance();
+    calc->clear_stack();
+}
 @end
