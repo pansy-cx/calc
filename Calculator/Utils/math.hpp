@@ -26,7 +26,7 @@ static bool cmp_priority(Field top, Field cur) {
     string scur = cur.value;
     if ((stop == "+" || stop == "-") && (scur == "+" || scur == "-"))
         return true;
-    if ((stop == "×" || stop == "÷") && (scur == "+" || scur == "-" || stop == "×" || stop == "÷"))
+    if ((stop == "*" || stop == "/") && (scur == "+" || scur == "-" || stop == "*" || stop == "/"))
         return true;
     return false;
 }
@@ -38,7 +38,7 @@ static vector<Field> mid_2_post(const vector<Field> &vec) {
     
     for (int i = 0; i < vec.size(); i++) {
         auto v = vec[i];
-        if (v.type == DIGITAL) {
+        if (v.type == CALC_DIGITAL) {
             ret.push_back(v);
         } else if (sign_stack.empty()) {
             sign_stack.push(v);
@@ -64,7 +64,7 @@ static double calc_post(vector<Field> &vec) {
     stack<double>opStack;
     for (int i = 0; i < vec.size(); i++) {
         Field v = vec[i];
-        if (v.type == DIGITAL) {
+        if (v.type == CALC_DIGITAL) {
             opStack.push(string_to_double(v.value));
         } else {
             op2 = opStack.top();
@@ -78,10 +78,10 @@ static double calc_post(vector<Field> &vec) {
                 case "-"_hash:
                     opStack.push(op1 - op2);
                     break;
-                case "×"_hash:
+                case "*"_hash:
                     opStack.push(op1 * op2);
                     break;
-                case "÷"_hash:
+                case "/"_hash:
                     opStack.push(op1 / op2);
                     break;
             }

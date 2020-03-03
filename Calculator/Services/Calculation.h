@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (enum CALC_TYPE)getCurrType;
 - (void)clearStack;
 - (bool)getCurrClear;
+- (NSString *)getCurrSign;
 @end
 
 NS_ASSUME_NONNULL_END

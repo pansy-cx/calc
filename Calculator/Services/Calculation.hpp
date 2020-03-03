@@ -32,8 +32,9 @@ private:
 public:
     static Calculation_cpp* getInstance();
     void on_input(const string &str);
-    string get_screen_result();
+    const string& get_screen_result();
     CALC_TYPE get_curr_type();
+    const string& get_curr_sign();
     void clear_curr_stack();
     void clear_stack();
     bool get_curr_clear();
@@ -50,18 +51,15 @@ Calculation_cpp* Calculation_cpp::getInstance() {
 }
 void Calculation_cpp::on_input(const string &str) {
     if (vexpr.size() == 0) {
-        Field f(DIGITAL, "0");
+        Field f(CALC_DIGITAL, "0");
         vexpr.push_back(f);
     }
     is_curr_clear = true;
     switch (hash_(str.c_str())) {
-        case "+"_hash:
-        case "-"_hash:
-        case "×"_hash: case "*"_hash:
-        case "÷"_hash: case "/"_hash: {
+        case "+"_hash: case "-"_hash: case "*"_hash: case "/"_hash: {
             Field *f = &vexpr.back();
-            if (f->type == DIGITAL) {
-                Field f(SIGN, str);
+            if (f->type == CALC_DIGITAL) {
+                Field f(CALC_SIGN, str);
                 vexpr.push_back(f);
             } else {
                 f->value = str;
@@ -83,7 +81,7 @@ void Calculation_cpp::on_input(const string &str) {
         case "±"_hash: {
             vector<Field>::iterator iter = vexpr.end();
             while(iter-- != vexpr.begin()) {
-                if (iter->type == DIGITAL && iter->value != "0") {
+                if (iter->type == CALC_DIGITAL && iter->value != "0") {
                     double res = string_to_double(iter->value) * (-1);
                     iter->value = double_to_string(res);
                     break;
@@ -96,17 +94,17 @@ void Calculation_cpp::on_input(const string &str) {
             auto post = mid_2_post(vexpr);
             double ret = calc_post(post);
             vector<Field>().swap(vexpr);
-            Field f(DIGITAL, double_to_string(ret));
+            Field f(CALC_DIGITAL, double_to_string(ret));
             vexpr.push_back(f);
             break;
         }
         case "."_hash: {
-            if (vexpr.empty() || vexpr.back().type == SIGN) {
-                Field new_field(DIGITAL, "0.");
+            if (vexpr.empty() || vexpr.back().type == CALC_SIGN) {
+                Field new_field(CALC_DIGITAL, "0.");
                 vexpr.push_back(new_field);
             } else {
                 Field *f = &vexpr.back();
-                if (f->type == DIGITAL && is_int(f->value)) f->value += ".";
+                if (f->type == CALC_DIGITAL && is_int(f->value)) f->value += ".";
                 f = NULL;
                 delete f;
             }
@@ -116,13 +114,13 @@ void Calculation_cpp::on_input(const string &str) {
             // number
             string _str = str;
             Field *f = &vexpr.back();
-            if (f->type == DIGITAL) {
+            if (f->type == CALC_DIGITAL) {
                 string value = f->value;
                 f->value = value == "0" ? _str : value + _str;
                 f = NULL;
                 delete f;
             } else {
-                Field new_field(DIGITAL, _str);
+                Field new_field(CALC_DIGITAL, _str);
                 vexpr.push_back(new_field);
             }
             f = NULL;
@@ -130,25 +128,28 @@ void Calculation_cpp::on_input(const string &str) {
             break;
     }
 }
-string Calculation_cpp::get_screen_result() {
+const string& Calculation_cpp::get_screen_result() {
     // 当前屏幕展示的结果，即堆栈里最后的数字
+    static string result;
+    result = "0";
     for (vector<Field>::iterator iter = vexpr.end(); iter != vexpr.begin();) {
         auto it = *(--iter);
-        if (it.type == DIGITAL) {
-            return it.value;
+        if (it.type == CALC_DIGITAL) {
+            result = it.value;
+            return result;
         } else {
             // 如果删除当前输入的数字，显示0，而不是显示上一个堆栈的数字
-            if (!is_curr_clear) return "0";
+            if (!is_curr_clear) return result;
         }
     }
-    return "0";
+    return result;
 }
 CALC_TYPE Calculation_cpp::get_curr_type() {
     if (!vexpr.empty()) {
         Field f = vexpr.back();
         return f.type;
     } else {
-        return INIT;
+        return CALC_INIT;
     }
 }
 void Calculation_cpp::clear_stack() {
@@ -164,5 +165,16 @@ void Calculation_cpp::clear_stack() {
 bool Calculation_cpp::get_curr_clear() {
     return is_curr_clear;
 }
-
+const string& Calculation_cpp::get_curr_sign() {
+    static string result;
+    result = "";
+    for (vector<Field>::iterator iter = vexpr.end(); iter != vexpr.begin();) {
+        auto it = *(--iter);
+        if (it.type == CALC_SIGN) {
+            result = it.value;
+            return result;
+        }
+    }
+    return result;
+}
 #endif /* Calculation_hpp */

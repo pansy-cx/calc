@@ -14,12 +14,13 @@ struct btnStyle: ButtonStyle {
     let borderColor: Color
     let width: CGFloat
     let height: CGFloat
+    let borderWidth: CGFloat
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .foregroundColor(Color.white)
             .background(configuration.isPressed ? pressColor : color)
             .frame(width: width, height: height)
-            .border(borderColor, width: 0.5)
+            .border(borderColor, width: borderWidth)
     }
 }
 
@@ -31,6 +32,7 @@ struct CalcButton: View {
     let action: () -> Void
     var width = 50
     var height = 50
+    var borderWidth = 0.5
     var body: some View {
         Button(action: action) {
             Text(btnText)
@@ -43,7 +45,8 @@ struct CalcButton: View {
                 pressColor: pressColor,
                 borderColor: borderColor,
                 width: CGFloat(width),
-                height: CGFloat(height)
+                height: CGFloat(height),
+                borderWidth: CGFloat(borderWidth)
             )
         )
     }

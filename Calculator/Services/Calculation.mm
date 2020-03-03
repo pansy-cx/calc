@@ -33,4 +33,11 @@ using namespace std;
     auto calc = Calculation_cpp::getInstance();
     return calc->get_curr_clear();
 }
+- (NSString *)getCurrSign {
+    auto calc = Calculation_cpp::getInstance();
+    const char* s = calc->get_curr_sign().c_str();
+    NSString *a = [NSString stringWithCString:s
+                              encoding:NSUTF8StringEncoding];
+    return a;
+}
 @end

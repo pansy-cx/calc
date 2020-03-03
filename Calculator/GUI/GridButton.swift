@@ -18,11 +18,11 @@ let btnArray: [IBtnType] = [
     IBtnType(value: "AC", color: "656567", pressColor: "656567aa"),
     IBtnType(value: "±", color: "656567", pressColor: "656567aa"),
     IBtnType(value: "%", color: "656567", pressColor: "656567aa"),
-    IBtnType(value: "÷", color: "f99c2a", pressColor: "f99c2aaa"),
+    IBtnType(value: "/", color: "f99c2a", pressColor: "f99c2aaa"),
     IBtnType(value: "7", color: "7d7e80", pressColor: "7d7e80aa"),
     IBtnType(value: "8", color: "7d7e80", pressColor: "7d7e80aa"),
     IBtnType(value: "9", color: "7d7e80", pressColor: "7d7e80aa"),
-    IBtnType(value: "×", color: "f99c2a", pressColor: "f99c2aaa"),
+    IBtnType(value: "*", color: "f99c2a", pressColor: "f99c2aaa"),
     IBtnType(value: "4", color: "7d7e80", pressColor: "7d7e80aa"),
     IBtnType(value: "5", color: "7d7e80", pressColor: "7d7e80aa"),
     IBtnType(value: "6", color: "7d7e80", pressColor: "7d7e80aa"),
@@ -47,8 +47,16 @@ struct GridButton: View {
                 let btnType = btnArray[safe: i]
                 if (btnType != nil) {
                     let _btnType = btnType!
-                    let text = _btnType.value == "AC" ?
-                        calc.getCurrClear() ? "C" : "AC" : _btnType.value
+                    var text = _btnType.value
+                    if (_btnType.value == "AC") {
+                        text = calc.getCurrClear() ? "C" : "AC"
+                    }
+                    if (_btnType.value == "/") {
+                        text = "÷"
+                    }
+                    if (_btnType.value == "*") {
+                        text = "×"
+                    }
                     return AnyView(CalcButton(
                         btnText: text,
                         color: Color.init(hex: _btnType.color),
@@ -63,7 +71,8 @@ struct GridButton: View {
                             self.calcData.setScreenResult(val: calc.getScreenResult())
                         },
                         width: _btnType.width,
-                        height: _btnType.height
+                        height: _btnType.height,
+                        borderWidth: (calc.getCurrSign() == _btnType.value) ? 1.5 : 0.5
                     ))
                 } else {
                     return AnyView(EmptyView())
