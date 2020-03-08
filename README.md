@@ -11,6 +11,7 @@ UI 部分用 Swift，逻辑部分用 C++，中间通过 Objective-C 连接。
 - [v0.5](https://github.com/pansy-cx/Calc/tree/32b278060a1ea5219c29f2527e13a38d44d9cfef) 添加清除按钮功能
 - [v0.6](https://github.com/pansy-cx/Calc/tree/83e3a2f5c0015d8c730a9edef458ad1f93f09739) 监听键盘 
 - [v0.9](https://github.com/pansy-cx/Calc/tree/25d744260bc41aa5e6f03d3a750474a772d08f46) 选中符号高亮
+- [v0.10](https://github.com/pansy-cx/Calc/tree/10405981ae445e9742772b1ecf01008a71aca7e8) 实时计算
 
 ### 使用
 
@@ -22,4 +23,4 @@ Product -> Run
 - ~~相应键盘事件~~
 - 添加 Scientific 模式
 - ~~选中符号高亮~~
-- 实时计算
+- ~~实时计算~~
