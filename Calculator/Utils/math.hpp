@@ -20,15 +20,15 @@
 using namespace std;
 
 // 优先级
-// 比较当前字符与栈顶字符的优先级，若栈顶高，返回true
-static bool cmp_priority(Field top, Field cur) {
-    string stop = top.value;
-    string scur = cur.value;
-    if ((stop == "+" || stop == "-") && (scur == "+" || scur == "-"))
-        return true;
-    if ((stop == "*" || stop == "/") && (scur == "+" || scur == "-" || stop == "*" || stop == "/"))
-        return true;
-    return false;
+// 比较两个 Field 优先级，1 -> 大于 | 0 -> 等于 | -1 -> 小于
+static int cmp_priority(const Field &a, const Field &b) {
+    string va = a.value;
+    string vb = b.value;
+    if ((va == "*" || va == "/")) {
+        return (vb == "*" || vb == "/") ? 0 : 1;
+    } else {
+        return (vb == "*" || vb == "/") ? -1 : 0;
+    }
 }
 
 // 中缀表达式 -> 后缀表达式
@@ -42,8 +42,8 @@ static vector<Field> mid_2_post(const vector<Field> &vec) {
             ret.push_back(v);
         } else if (sign_stack.empty()) {
             sign_stack.push(v);
-        } else if(cmp_priority(sign_stack.top(), v)) {
-            while (!sign_stack.empty() && cmp_priority(sign_stack.top(), v)) {
+        } else if(cmp_priority(sign_stack.top(), v) >= 0) {
+            while (!sign_stack.empty() && cmp_priority(sign_stack.top(), v) >= 0) {
               ret.push_back(sign_stack.top());
               sign_stack.pop();
             }

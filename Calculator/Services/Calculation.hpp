@@ -57,15 +57,23 @@ void Calculation_cpp::on_input(const string &str) {
     is_curr_clear = true;
     switch (hash_(str.c_str())) {
         case "+"_hash: case "-"_hash: case "*"_hash: case "/"_hash: {
-            Field *f = &vexpr.back();
-            if (f->type == CALC_DIGITAL) {
+            vector<Field>::iterator iter = vexpr.end() - 1;
+            if (iter->type == CALC_DIGITAL) {
                 Field f(CALC_SIGN, str);
+                // 比较两个符号，如果同级，实时计算
+                while(iter != vexpr.begin()) {
+                    if ((--iter)->type == CALC_SIGN && cmp_priority(*iter, f) >= 0) {
+                        vector<Field> cut_vexpr(--iter, vexpr.end());
+                        auto post = mid_2_post(cut_vexpr);
+                        double ret = calc_post(post);
+                        vexpr.erase(iter, vexpr.end());
+                        vexpr.push_back(Field(CALC_DIGITAL, double_to_string(ret)));
+                    }
+                }
                 vexpr.push_back(f);
             } else {
-                f->value = str;
+                iter->value = str;
             }
-            f = NULL;
-            delete f;
             break;
         }
         case "%"_hash: {
