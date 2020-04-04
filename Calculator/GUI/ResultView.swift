@@ -17,6 +17,7 @@ struct ResultView: View {
                 .fontWeight(.thin)
                 .foregroundColor(Color.white)
                 .lineLimit(1)
+                .minimumScaleFactor(0.5)
         }
         .padding(.trailing, 10)
         .frame(maxWidth: .infinity, maxHeight: 60, alignment: .trailing)
